@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Мои заказы</h1>
+    {% if orders %}
+        <div class="container row" style="gap: 5rem">
+            {% for order in orders %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-family: 'base',sans-serif">{{ order.status_verbose }}</h5>
+                        {% for product in order.iteminorder_set.all %}
+                            <p class="card-text">
+                                Название: {{ product.product.name }}
+                                Колличество: {{ product.count }}
+                            </p>
+                        {% endfor %}
+                        {% if order.status == 'new' %}
+                            <a href="{% url 'delete_order' order.pk %}" class="card-link">Удалить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            <p>Нету заказов</p>
+        </div>
+    {% endif %}
+{% endblock %}

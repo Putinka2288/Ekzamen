@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Каталог</h1>
+    <div class="container row" style="gap: 5rem">
+        {% for item in products %}
+            <div class="card col-3" style="width: 18rem;">
+                <img src="{{ item.photo_file.url }}" class="card-img-top" alt="{{ item.photo_file }}" width="200"
+                     height="150">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'product' item.pk %}">{{ item.name }}</a></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Цена: {{ item.price }}</li>
+                </ul>
+                {% if user.is_authenticated %}
+                    <div class="card-body">
+                        <a href="#" class="card-link">В корзинеу</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

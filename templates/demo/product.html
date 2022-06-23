@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ product.name }}</h1>
+    <div class="card" style="width: 18rem;">
+        <img src="{{ product.photo_file.url }}" class="card-img-top" alt="{{ product.photo_file }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">Цена: {{ product.price }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Страна производства: {{ product.country }}</li>
+            <li class="list-group-item">Год производства: {{ product.year }}</li>
+            <li class="list-group-item">Модель: {{ product.model }}</li>
+        </ul>
+        {% if user.is_authenticated %}
+            <div class="card-body">
+                <a href="#" class="card-link">В корзину</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
